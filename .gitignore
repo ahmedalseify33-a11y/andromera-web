@@ -1,0 +1,5 @@
+.skills/
+.DS_Store
+brand assets/
+*.log
+node_modules/

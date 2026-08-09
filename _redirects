@@ -1,0 +1,3 @@
+# Canonicalise www to apex
+https://www.andromera.com/* https://andromera.com/:splat 301
+http://www.andromera.com/* https://andromera.com/:splat 301
