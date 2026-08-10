@@ -1,3 +1,5 @@
-# Canonicalise www to apex
-https://www.andromera.com/* https://andromera.com/:splat 301
-http://www.andromera.com/* https://andromera.com/:splat 301
+# Cloudflare Pages _redirects
+# Incoming paths must be relative (starting with /).
+# Domain-level canonicalization (www.andromera.com -> andromera.com) is managed via Cloudflare Dashboard Page Rules / Bulk Redirects.
+
+/home / 301
