@@ -531,6 +531,241 @@
     .proof-strip__divider { width: 2rem; height: 1px; }
   }
 
+  /* ── SERVICES SECTION ───────────────────────────────── */
+  .services-section {
+    position: relative;
+    padding-block: 6rem;
+    background-color: var(--ink);
+    border-top: 1px solid var(--rule);
+  }
+
+  .services__header {
+    margin-bottom: 4rem;
+    max-width: 62ch;
+  }
+
+  .services__eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--glow);
+    margin-bottom: 1rem;
+  }
+
+  .services__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--step-3);
+    color: var(--paper);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+
+  .services__intro {
+    font-family: var(--font-mono);
+    font-size: var(--step-0);
+    color: var(--paper-70);
+    line-height: 1.65;
+  }
+
+  /* Disclosure accordion rows */
+  .services__list {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4rem;
+  }
+
+  .service-row {
+    border-bottom: 1px solid var(--rule);
+    transition: background-color 200ms var(--ease);
+  }
+  .service-row:first-child {
+    border-top: 1px solid var(--rule);
+  }
+  .service-row:hover {
+    background-color: rgba(27, 42, 74, 0.4);
+  }
+
+  .service-row__summary {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 72px;
+    padding-block: 1.5rem;
+    padding-inline: 1rem;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+  .service-row__summary::-webkit-details-marker {
+    display: none;
+  }
+  .service-row__summary:focus-visible {
+    outline: 2px solid var(--glow);
+    outline-offset: -2px;
+  }
+
+  .service-row__header-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+  }
+
+  @media (min-width: 768px) {
+    .service-row__header-group {
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  .service-row__number {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 500;
+    color: var(--paper-45);
+    transition: color 200ms var(--ease);
+  }
+  .service-row:hover .service-row__number,
+  .service-row[open] .service-row__number {
+    color: var(--glow);
+  }
+
+  .service-row__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--step-2);
+    color: var(--paper);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .service-row__promise {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--paper-70);
+    font-style: italic;
+  }
+
+  .service-row__toggle {
+    font-family: var(--font-mono);
+    font-size: var(--step-1);
+    font-weight: 400;
+    color: var(--glow);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 200ms var(--ease);
+    flex-shrink: 0;
+  }
+  .service-row[open] .service-row__toggle {
+    transform: rotate(45deg);
+  }
+
+  /* Expanded capability list */
+  .service-row__body {
+    padding-inline: 1rem 1rem;
+    padding-bottom: 1.75rem;
+    padding-top: 0.25rem;
+  }
+  @media (min-width: 768px) {
+    .service-row__body {
+      padding-left: 4.5rem;
+    }
+  }
+
+  .service-row__capabilities {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .service-row__capability {
+    font-family: var(--font-mono);
+    font-size: var(--step-0);
+    color: var(--paper-70);
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    line-height: 1.5;
+  }
+  .service-row__capability::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--glow);
+    flex-shrink: 0;
+    transform: translateY(-2px);
+  }
+
+  /* Focus Callout ("WHAT WE DON'T DO") — css-border-gradient */
+  .focus-callout {
+    position: relative;
+    background: var(--indigo);
+    border-radius: 4px;
+    padding: 2.5rem;
+    margin-block: 4rem;
+    border: 1px solid transparent;
+    background-image:
+      linear-gradient(var(--indigo), var(--indigo)),
+      linear-gradient(135deg, rgba(245, 240, 235, 0.2), rgba(0, 212, 170, 0.35), rgba(245, 240, 235, 0.05));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  .focus-callout__label {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--glow);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .focus-callout__body {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    color: var(--paper);
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    max-width: 65ch;
+  }
+
+  /* Services Section CTA */
+  .services-cta {
+    text-align: center;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .services-cta__prompt {
+    font-family: var(--font-mono);
+    font-size: var(--step-0);
+    color: var(--paper-70);
+  }
+
+  .services-cta__sub {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--paper-45);
+  }
+
   /* ── FOOTER ─────────────────────────────────────────── */
   .site-footer {
     background-color: var(--ink);
