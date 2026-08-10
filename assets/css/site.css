@@ -1133,6 +1133,10 @@
     gap: 1.25rem;
   }
 
+  .services-cta .nav__cta {
+    display: inline-flex;
+  }
+
   .services-cta__prompt {
     font-family: var(--font-mono);
     font-size: var(--step-0);
