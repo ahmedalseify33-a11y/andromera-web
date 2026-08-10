@@ -188,6 +188,55 @@
     checkWhatsApp();
   }
 
+  /* ── TIMELINE OBSERVER ────────────────────────────── */
+  function initTimeline() {
+    var timeline = document.querySelector(".timeline");
+    if (!timeline) return;
+
+    var steps = Array.from(timeline.querySelectorAll(".timeline__step"));
+    var progressBar = timeline.querySelector(".timeline__progress-bar");
+    if (!steps.length) return;
+
+    if (reduceMotion) {
+      steps.forEach(function (step) { step.classList.add("is-active"); });
+      if (progressBar) progressBar.style.transform = "scaleY(1)";
+      return;
+    }
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-active");
+              updateProgressBar();
+            }
+          });
+        },
+        { threshold: 0.4, rootMargin: "0px 0px -20% 0px" }
+      );
+
+      steps.forEach(function (step) { observer.observe(step); });
+    } else {
+      steps.forEach(function (step) { step.classList.add("is-active"); });
+    }
+
+    function updateProgressBar() {
+      if (!progressBar) return;
+      var activeCount = steps.filter(function (s) { return s.classList.contains("is-active"); }).length;
+      var ratio = activeCount / steps.length;
+      var isDesktop = window.innerWidth >= 1000;
+      if (isDesktop) {
+        progressBar.style.transform = "scaleX(" + ratio + ")";
+      } else {
+        progressBar.style.transform = "scaleY(" + ratio + ")";
+      }
+    }
+
+    window.addEventListener("scroll", updateProgressBar, { passive: true });
+    window.addEventListener("resize", updateProgressBar, { passive: true });
+  }
+
   /* ── INIT ─────────────────────────────────────────── */
   window.addEventListener("scroll", checkScroll, { passive: true });
   checkScroll();
@@ -196,5 +245,6 @@
     initWordReveals();
     initFadeUps();
     initWhatsAppFloat();
+    initTimeline();
   });
 })();
