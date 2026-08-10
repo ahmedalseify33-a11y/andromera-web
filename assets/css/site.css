@@ -557,7 +557,7 @@
   }
   .footer__brand-desc {
     font-size: var(--step--1);
-    color: var(--paper-45);
+    color: var(--paper-70);
     margin-top: 0.5rem;
     line-height: 1.6;
   }
@@ -575,7 +575,7 @@
   .footer__link {
     display: block;
     font-size: var(--step--1);
-    color: var(--paper-45);
+    color: var(--paper-70);
     padding-block: 0.25rem;
     transition: color var(--dur) var(--ease);
   }
@@ -589,7 +589,7 @@
     align-items: center;
     gap: 0.5rem;
     font-size: var(--step--1);
-    color: var(--paper-45);
+    color: var(--paper-70);
     transition: color var(--dur) var(--ease);
   }
   .footer__social-link:hover,
@@ -610,7 +610,7 @@
     padding-top: 1.5rem;
     border-top: 1px solid var(--rule);
     font-size: var(--step--1);
-    color: var(--paper-45);
+    color: var(--paper-70);
   }
   .footer__spark-dot {
     width: 5px;
