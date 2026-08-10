@@ -1,17 +1,9 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "andromera-web",
+  "main": "_worker.js",
   "compatibility_date": "2026-08-10",
   "assets": {
-    "directory": ".",
-    "exclude": [
-      ".git",
-      ".skills",
-      "brand assets",
-      "*.json",
-      "*.log",
-      "node_modules",
-      ".DS_Store"
-    ]
+    "directory": "."
   }
 }
