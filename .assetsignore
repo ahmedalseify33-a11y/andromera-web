@@ -1,10 +1,9 @@
 .git
 .skills
 brand assets
-*.json
 *.log
 node_modules
 .DS_Store
 README.md
 LAUNCH.md
-_worker.js
+src
