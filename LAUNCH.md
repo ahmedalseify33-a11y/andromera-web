@@ -48,8 +48,13 @@
   - In Cloudflare Dashboard → Workers & Pages → `andromera-web` → Settings → Triggers → Add Custom Domain:
     - Add `andromera.com`
     - Add `www.andromera.com`
+- [ ] **Disable workers.dev Route (Indexability Safety Net)**:
+  - In Cloudflare Dashboard → Workers & Pages → `andromera-web` → Settings → Triggers → Routes:
+    - Disable the `andromera-web.ahmedalseify33.workers.dev` route.
+  - This prevents Google from indexing the preview URL while canonical tags point at `andromera.com`.
 - [ ] **Cloudflare Web Analytics Token**:
   - In Cloudflare Dashboard → Web Analytics → Add Site → Copy Token.
   - In `index.html` line ~977, replace `CLOUDFLARE_BEACON_TOKEN` with your token string.
 - [ ] **DNS & Canonicalization**:
   - Verify `www.andromera.com` redirects to `andromera.com` in Cloudflare Redirect Rules.
+
