@@ -313,6 +313,9 @@
   .mobile-menu.is-open .mobile-menu__link:nth-child(3) { transition-delay: 0.15s; }
   .mobile-menu.is-open .mobile-menu__link:nth-child(4) { transition-delay: 0.20s; }
   .mobile-menu.is-open .mobile-menu__link:nth-child(5) { transition-delay: 0.25s; }
+  .mobile-menu__link--cta {
+    color: var(--glow);
+  }
   .mobile-menu__link:hover,
   .mobile-menu__link:focus-visible {
     color: var(--glow);
@@ -578,6 +581,9 @@
     color: var(--paper-70);
     padding-block: 0.25rem;
     transition: color var(--dur) var(--ease);
+  }
+  .footer__link--static {
+    cursor: default;
   }
   .footer__link:hover,
   .footer__link:focus-visible {
