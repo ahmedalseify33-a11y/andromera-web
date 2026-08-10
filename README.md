@@ -1,109 +1,127 @@
-# Andromera — Marketing Website
+# Andromera Website — Maintenance & Operational Guide
 
-AI-native growth partner for Egyptian fashion and personal-care brands.
+Welcome to the codebase for **Andromera** (https://andromera.com/). This website is built using pure HTML5, vanilla CSS, and minimal JavaScript — with zero framework, zero build step, and zero external dependencies.
 
-## Stack
+---
 
-- Plain HTML5 + hand-written CSS + vanilla JS
-- Zero build step
-- Deploys to Cloudflare Pages as static files
+## 1. How to Change Text or Copy
+All page text lives in `index.html`.
 
-## Local Development
+1. Open `index.html` in any code editor (VS Code, TextEdit, etc.).
+2. Use `Cmd + F` (Mac) or `Ctrl + F` (Windows) to search for the sentence or headline you want to update.
+3. Edit the text between the HTML tags.
+4. Save the file.
+5. Push to GitHub (`git commit` and `git push`), and Cloudflare will deploy the changes live automatically within 10–15 seconds.
 
+---
+
+## 2. Where Colors & Fonts Are Defined (How to Edit Safely)
+All color palette choices and design tokens live in **`assets/css/brand-tokens.css`**.
+
+### Changing Colors
+- `--ink` (`#0D1B2A`): Background color for primary sections.
+- `--indigo` (`#1B2A4A`): Background color for cards, Callout boxes, and Method section.
+- `--paper` (`#F5F0EB`): Primary text color.
+- `--glow` (`#00D4AA`): Teal interaction color. **Teal owns 100% of interactive states** (buttons, links, hover rings, active indicators).
+- `--warn` (`#F0B429`): Form validation amber color.
+
+> ⚠️ **The Violet Rule**: `--violet`, `--violet-light`, and `--violet-deep` are reserved strictly for ambient background glow gradients (planet blooms). **Never** use violet for text, buttons, borders, icons, or links.
+
+### Fonts
+Fonts are self-hosted in `assets/fonts/` as subsetted `.woff2` files:
+- `CormorantGaramond-SemiBold.woff2` (Display Headlines)
+- `DMMono-Regular.woff2` (Body, Labels, Code, Numbers)
+- `DMMono-Medium.woff2` (Navigation, Buttons, Badges)
+
+Font definitions live at the top of `assets/css/site.css`. Do not load Google Fonts or CDN fonts.
+
+---
+
+## 3. How to Add a Service Row
+To add a ninth service row in section `#services` (`index.html`), copy and paste this exact markup inside `<div class="services__list">`:
+
+```html
+<!-- 09 -->
+<details class="service-row fade-up" id="services-09">
+  <summary class="service-row__summary">
+    <span class="service-row__number">09</span>
+    <div class="service-row__header-group">
+      <h3 class="service-row__name">Service Name Here</h3>
+      <span class="service-row__promise">One-line promise statement goes here.</span>
+    </div>
+    <span class="service-row__toggle" aria-hidden="true">+</span>
+  </summary>
+  <div class="service-row__body">
+    <ul class="service-row__capabilities">
+      <li class="service-row__capability">First capability item</li>
+      <li class="service-row__capability">Second capability item</li>
+      <li class="service-row__capability">Third capability item</li>
+    </ul>
+  </div>
+</details>
+```
+
+Also add the link to the Footer services column:
+```html
+<a href="#services-09" class="footer__link">Service Name</a>
+```
+
+---
+
+## 4. How to Add the Official Contact Email
+When the official contact email is ready, update these **three exact locations**:
+
+1. **Footer Contact Column** (`index.html` line ~515):
+   Replace `<!-- COPY NEEDED: contact email -->` with:
+   `<a href="mailto:hello@andromera.com" class="footer__link">hello@andromera.com</a>`
+
+2. **Audit Section Alternative Contact** (`index.html` line ~965):
+   Replace `<!-- COPY NEEDED: contact email -->` with:
+   `<a href="mailto:hello@andromera.com">Email hello@andromera.com</a>`
+
+3. **Structured Data JSON-LD** (`index.html` line ~80):
+   Add `"email": "hello@andromera.com"` inside `ContactPoint`.
+
+---
+
+## 5. Deployment, Rollback, & Health Checking
+
+### Deployment
+Deployment is 100% automatic via Git:
 ```bash
-# Serve locally
-cd /path/to/andromera-web
-python3 -m http.server 8000
-
-# Open in browser
-open http://localhost:8000
+git add .
+git commit -m "Describe your changes"
+git push origin main
 ```
+Cloudflare Workers receives the commit and deploys it live in 10–15 seconds.
 
-## Deployment
+### Checking Deployment Success
+Run `curl -I https://andromera.com/` in your terminal. You should see `HTTP/2 200` and response security headers.
 
-### Step 1: Push to GitHub
-
+### Rolling Back
+If a mistake is published, revert the commit in Git:
 ```bash
-git remote add origin git@github.com:YOUR_USERNAME/andromera-web.git
-git push -u origin main
+git revert HEAD
+git push origin main
 ```
 
-### Step 2: Connect Cloudflare Pages
+---
 
-1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com/) → Pages → Create a project
-2. Connect your GitHub account and select the `andromera-web` repository
-3. Configure build settings:
-   - **Framework preset:** None
-   - **Build command:** _(leave empty)_
-   - **Build output directory:** `/`
-4. Deploy
+## 6. Governed Rules (Non-Negotiable)
 
-### Step 3: Custom Domain
+1. **No Prices or Rates**: Never publish prices, currency symbols (`$`, `EGP`, `£`), retainer minimums, hourly rates, or "starting from" language.
+2. **No Commercial AI Vendor Names**: Never publish AI vendor, model, or tool names. Capability language only (*"AI-native growth engine"*, *"aligned AI"*).
+3. **No Fabricated Proof**: Never publish manufactured client counts, logos, fake reviews, star ratings, or result percentages.
+4. **Teal vs. Violet**: Violet is atmosphere only. Teal owns 100% of interaction.
 
-#### Option A (Recommended): Move nameservers to Cloudflare
+---
 
-1. In Cloudflare Dashboard → Add Site → `andromera.com`
-2. Cloudflare will provide two nameservers
-3. Go to Hostinger → Domain Settings → change nameservers to the two Cloudflare provided
-4. Wait for propagation (up to 24h, usually under 1h)
-5. In Cloudflare Pages → Custom domains → Add `andromera.com` and `www.andromera.com`
-6. Cloudflare handles SSL, CDN, analytics, and redirect rules automatically
-7. The `_redirects` file canonicalises `www.andromera.com → andromera.com` (301)
+## 7. Performance Budget
+- **Initial Load Page Weight**: ≤ 180 KB
+- **Uncompressed JS Size**: ≤ 16 KB
+- **Lighthouse Mobile Target**: ≥ 95 across all 4 categories (Performance, Accessibility, Best Practices, SEO).
 
-**Benefits:** Full CDN, free SSL, analytics, redirect rules, native apex domain support (CNAME flattening), DDoS protection.
-
-#### Option B: Keep Hostinger DNS
-
-1. In Cloudflare Pages → Custom domains → Add `www.andromera.com`
-2. Cloudflare will issue a CNAME target (e.g. `andromera-web.pages.dev`)
-3. In Hostinger DNS → Add a CNAME record: `www` → the Cloudflare Pages CNAME target
-4. For the apex `andromera.com`:
-   - If Hostinger supports ALIAS/ANAME records, point the apex to the same target
-   - Otherwise, set up a redirect from `andromera.com → www.andromera.com` in Hostinger
-5. SSL: Cloudflare Pages provides its own certificate for the custom domain
-
-**Drawback:** No CNAME flattening at apex, potential redirect chain, no Cloudflare analytics/WAF.
-
-### Step 4: Verify
-
+To run a Lighthouse test:
 ```bash
-# Check HTTPS
-curl -I https://andromera.com/
-
-# Check www redirect
-curl -I https://www.andromera.com/
+npx -y lighthouse https://andromera.com/ --form-factor=mobile
 ```
-
-## Project Structure
-
-```
-/
-├── index.html              # Main page
-├── 404.html                # Error page
-├── robots.txt              # Crawl directives
-├── sitemap.xml             # Sitemap
-├── site.webmanifest        # PWA manifest
-├── _headers                # Cloudflare security headers
-├── _redirects              # Cloudflare redirect rules
-├── AGENTS.md               # Design skill governance
-├── README.md               # This file
-└── assets/
-    ├── css/
-    │   ├── brand-tokens.css  # Design tokens (single source of truth)
-    │   └── site.css          # All styles (@layer architecture)
-    ├── js/
-    │   └── site.js           # Nav, menu, reveals, WhatsApp float
-    ├── fonts/                # Self-hosted woff2 (Latin subset)
-    ├── img/                  # SVGs, PNGs, posters, OG image
-    └── video/                # Reserved for Phase 4
-```
-
-## Phases
-
-| Phase | Scope | Status |
-|-------|-------|--------|
-| 1 | Foundation, tokens, nav, hero, footer | ✅ Complete |
-| 2 | Services — 8 pillars | Planned |
-| 3 | Method + engagement models | Planned |
-| 4 | Team constellation + brand story + audit form | Planned |
-| 5 | Case studies, analytics, final perf pass | Planned |

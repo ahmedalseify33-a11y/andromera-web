@@ -7,23 +7,6 @@
 
   document.documentElement.classList.add("js");
 
-  /* ── HOSTNAME INDEXABILITY SAFETY NET ─────────────── */
-  (function enforceRobots() {
-    var host = window.location.hostname;
-    var allowedHosts = ["andromera.com", "www.andromera.com", "localhost", "127.0.0.1"];
-    if (allowedHosts.indexOf(host) === -1) {
-      var meta = document.querySelector('meta[name="robots"]');
-      if (meta) {
-        meta.setAttribute("content", "noindex, nofollow");
-      } else {
-        meta = document.createElement("meta");
-        meta.name = "robots";
-        meta.content = "noindex, nofollow";
-        document.head.appendChild(meta);
-      }
-    }
-  })();
-
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ── NAV SCROLL STATE ─────────────────────────────── */

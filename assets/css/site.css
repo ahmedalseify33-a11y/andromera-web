@@ -1447,13 +1447,13 @@
   .form-group.has-error .form-input,
   .form-group.has-error .form-textarea,
   .form-group.has-error .audit-radios {
-    border-color: #FFB800;
+    border-color: var(--warn);
   }
 
   .form-error {
     font-family: var(--font-mono);
     font-size: var(--step--1);
-    color: #FFB800;
+    color: var(--warn);
     display: none;
     margin-top: 0.25rem;
   }

@@ -6,6 +6,7 @@
   --paper:        #F5F0EB;  /* Egyptian Cotton — text on dark, light surfaces */
   --glow:         #00D4AA;  /* Andromera Glow — accent, 10%. Interaction only. */
   --gold:         #C9A227;  /* Warm Gold — rare: awards, pull quotes */
+  --warn:         #F0B429;  /* Form validation only — never decorative */
 
   /* Ambient violet — sampled from the logo artwork. ATMOSPHERE ONLY.
      Never text, never buttons, never borders, never icons. */
