@@ -7,6 +7,23 @@
 
   document.documentElement.classList.add("js");
 
+  /* ── HOSTNAME INDEXABILITY SAFETY NET ─────────────── */
+  (function enforceRobots() {
+    var host = window.location.hostname;
+    var allowedHosts = ["andromera.com", "www.andromera.com", "localhost", "127.0.0.1"];
+    if (allowedHosts.indexOf(host) === -1) {
+      var meta = document.querySelector('meta[name="robots"]');
+      if (meta) {
+        meta.setAttribute("content", "noindex, nofollow");
+      } else {
+        meta = document.createElement("meta");
+        meta.name = "robots";
+        meta.content = "noindex, nofollow";
+        document.head.appendChild(meta);
+      }
+    }
+  })();
+
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ── NAV SCROLL STATE ─────────────────────────────── */
@@ -237,8 +254,93 @@
     window.addEventListener("resize", updateProgressBar, { passive: true });
   }
 
+  /* ── DETAILS ANCHOR TARGETING ─────────────────────── */
+  function openTargetRow() {
+    var hash = location.hash ? location.hash.substring(1) : "";
+    if (!hash) return;
+    var el = document.getElementById(hash);
+    if (el && el.tagName === "DETAILS") {
+      el.open = true;
+    }
+  }
+
+  /* ── AUDIT FORM HANDLER ────────────────────────────── */
+  function initAuditForm() {
+    var form = document.querySelector("#audit-form");
+    if (!form) return;
+
+    var stuckTextarea = form.querySelector("#audit-stuck");
+    var charCount = form.querySelector("#char-count");
+    var submittedOnce = false;
+
+    if (stuckTextarea && charCount) {
+      stuckTextarea.addEventListener("input", function () {
+        charCount.textContent = stuckTextarea.value.length + " / 300";
+      });
+    }
+
+    function validateField(group, input) {
+      var isValid = true;
+      if (input.type === "radio") {
+        var checked = form.querySelector('input[name="' + input.name + '"]:checked');
+        isValid = !!checked;
+      } else {
+        isValid = input.value.trim().length > 0;
+      }
+
+      group.classList.toggle("has-error", !isValid);
+      input.setAttribute("aria-invalid", !isValid ? "true" : "false");
+      return isValid;
+    }
+
+    function validateForm() {
+      var firstInvalid = null;
+      var allValid = true;
+
+      var groups = Array.from(form.querySelectorAll(".form-group"));
+      groups.forEach(function (group) {
+        var input = group.querySelector("input, textarea");
+        if (!input) return;
+
+        var valid = validateField(group, input);
+        if (!valid) {
+          allValid = false;
+          if (!firstInvalid) firstInvalid = input;
+        }
+      });
+
+      if (firstInvalid) firstInvalid.focus();
+      return allValid;
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      submittedOnce = true;
+
+      if (!validateForm()) return;
+
+      var brand = (form.querySelector("#audit-brand").value || "").trim();
+      var handle = (form.querySelector("#audit-handle").value || "").trim().replace(/^@/, "");
+      var categoryEl = form.querySelector('input[name="category"]:checked');
+      var category = categoryEl ? categoryEl.value : "";
+      var stuck = (form.querySelector("#audit-stuck").value || "").trim();
+      var name = (form.querySelector("#audit-name").value || "").trim();
+
+      var msg = "Hi Andromera — I'd like the free brand audit.\n\n" +
+                "Brand: " + brand + "\n" +
+                "Instagram: @" + handle + "\n" +
+                "Category: " + category + "\n" +
+                "What's stuck: " + stuck + "\n\n" +
+                "— " + name;
+
+      var waUrl = "https://wa.me/201508824638?text=" + encodeURIComponent(msg);
+      window.open(waUrl, "_blank", "noopener");
+    });
+  }
+
   /* ── INIT ─────────────────────────────────────────── */
   window.addEventListener("scroll", checkScroll, { passive: true });
+  window.addEventListener("hashchange", openTargetRow);
   checkScroll();
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -246,5 +348,7 @@
     initFadeUps();
     initWhatsAppFloat();
     initTimeline();
+    openTargetRow();
+    initAuditForm();
   });
 })();
