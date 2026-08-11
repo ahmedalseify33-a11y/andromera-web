@@ -246,11 +246,14 @@
     if (!btn || !media) return;
 
     btn.addEventListener("click", function () {
-      media.innerHTML =
-        '<iframe class="video-frame__iframe" title="Andromera brand film" ' +
-        'src="https://fast.wistia.net/embed/iframe/rdjieby67t?autoPlay=true&playerColor=00D4AA" ' +
-        'allow="autoplay; fullscreen" frameborder="0" scrolling="no" ' +
-        'width="100%" height="100%"></iframe>';
+      var iframe = document.createElement("iframe");
+      iframe.src = "https://fast.wistia.net/embed/iframe/rdjieby67t?autoPlay=true&playsinline=true&playerColor=00D4AA";
+      iframe.title = "Andromera brand film";
+      iframe.allow = "autoplay; fullscreen; picture-in-picture";
+      iframe.setAttribute("allowfullscreen", "");
+      iframe.className = "video-frame__iframe";
+      media.replaceChildren(iframe);
+      iframe.focus();
     });
   }
 
