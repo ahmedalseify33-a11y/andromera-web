@@ -36,6 +36,10 @@
   <!-- Parallelize the @import inside site.css (avoids a serial round trip for brand-tokens.css) -->
   <link rel="preload" href="/assets/css/brand-tokens.css" as="style">
 
+  <!-- Preload LCP hero poster (AVIF only — matches the format actually fetched) -->
+  <link rel="preload" as="image" type="image/avif"
+        href="/assets/img/hero-poster-1280.avif" fetchpriority="high">
+
   <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/site.css">
 
@@ -200,10 +204,19 @@
       <!-- Layer 1: Hero poster background -->
       <div class="hero__poster" aria-hidden="true">
         <picture>
-          <source srcset="/assets/img/hero-poster.avif" type="image/avif" media="(min-width: 900px)">
-          <source srcset="/assets/img/hero-poster.webp" type="image/webp" media="(min-width: 900px)">
-          <source srcset="/assets/img/hero-poster-1280.webp" type="image/webp">
-          <img src="/assets/img/hero-poster.webp" alt="" width="1920" height="1080" loading="eager" decoding="async">
+          <source type="image/avif"
+                  srcset="/assets/img/hero-poster-828.avif 828w,
+                          /assets/img/hero-poster-1280.avif 1280w,
+                          /assets/img/hero-poster.avif 1920w"
+                  sizes="100vw">
+          <source type="image/webp"
+                  srcset="/assets/img/hero-poster-828.webp 828w,
+                          /assets/img/hero-poster-1280.webp 1280w,
+                          /assets/img/hero-poster.webp 1920w"
+                  sizes="100vw">
+          <img src="/assets/img/hero-poster-1280.webp" alt=""
+               width="1280" height="720"
+               fetchpriority="high" decoding="sync" loading="eager">
         </picture>
       </div>
 
