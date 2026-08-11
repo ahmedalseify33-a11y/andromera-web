@@ -38,7 +38,11 @@
 
   <!-- Preload LCP hero poster (AVIF only — matches the format actually fetched) -->
   <link rel="preload" as="image" type="image/avif"
-        href="/assets/img/hero-poster-1280.avif" fetchpriority="high">
+        href="/assets/img/hero-poster-1280.avif"
+        imagesrcset="/assets/img/hero-poster-828.avif 828w,
+                     /assets/img/hero-poster-1280.avif 1280w,
+                     /assets/img/hero-poster.avif 1920w"
+        imagesizes="100vw" fetchpriority="high">
 
   <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/site.css">
