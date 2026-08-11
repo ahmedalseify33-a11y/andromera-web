@@ -68,23 +68,7 @@ Also add the link to the Footer services column:
 
 ---
 
-## 4. How to Add the Official Contact Email
-When the official contact email is ready, update these **three exact locations**:
-
-1. **Footer Contact Column** (`index.html` line ~515):
-   Replace `<!-- COPY NEEDED: contact email -->` with:
-   `<a href="mailto:hello@andromera.com" class="footer__link">hello@andromera.com</a>`
-
-2. **Audit Section Alternative Contact** (`index.html` line ~965):
-   Replace `<!-- COPY NEEDED: contact email -->` with:
-   `<a href="mailto:hello@andromera.com">Email hello@andromera.com</a>`
-
-3. **Structured Data JSON-LD** (`index.html` line ~80):
-   Add `"email": "hello@andromera.com"` inside `ContactPoint`.
-
----
-
-## 5. Deployment, Rollback, & Health Checking
+## 4. Deployment, Rollback, & Health Checking
 
 ### Deployment
 Deployment is 100% automatic via Git:
@@ -107,7 +91,7 @@ git push origin main
 
 ---
 
-## 6. Governed Rules (Non-Negotiable)
+## 5. Governed Rules (Non-Negotiable)
 
 1. **No Prices or Rates**: Never publish prices, currency symbols (`$`, `EGP`, `£`), retainer minimums, hourly rates, or "starting from" language.
 2. **No Commercial AI Vendor Names**: Never publish AI vendor, model, or tool names. Capability language only (*"AI-native growth engine"*, *"aligned AI"*).
@@ -116,7 +100,7 @@ git push origin main
 
 ---
 
-## 7. Performance Budget
+## 6. Performance Budget
 - **Initial Load Page Weight**: ≤ 180 KB
 - **Uncompressed JS Size**: ≤ 16 KB
 - **Lighthouse Mobile Target**: ≥ 95 across all 4 categories (Performance, Accessibility, Best Practices, SEO).

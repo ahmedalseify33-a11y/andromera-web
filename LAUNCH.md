@@ -2,7 +2,7 @@
 
 **Site Status**: Production Ready  
 **Target Domain**: `https://andromera.com/`  
-**Worker Preview**: `https://andromera-web.ahmedalseify33.workers.dev/`
+**Worker Preview**: `https://andromera-web.ahmedalseify33.workers.dev/` (workers.dev route disabled — returns 404)
 
 ---
 
@@ -14,7 +14,7 @@
 - [x] **Social Proof Integrity**: 0 manufactured client logos, testimonials, star ratings, or percentage claims.
 - [x] **Team Anonymity**: 0 team member names, photos, ages, or personal biographies.
 - [x] **Placeholder Cleanliness**: 0 `lorem`, `TODO`, `FIXME`, or leftover scratch comments in source.
-- [ ] **Contact Email**: Pending official address receipt. `<!-- COPY NEEDED: contact email -->` placeholder intact across 3 locations.
+- [x] **Contact Email**: Settled — no contact email on this site. All placeholders removed. Contact channels: WhatsApp, Instagram, Cairo.
 
 ---
 
@@ -28,7 +28,7 @@
 - [x] **Icons & Manifest**: `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `site.webmanifest` valid.
 - [x] **Error Page**: `404.html` is brand-styled and links home.
 - [x] **HTTP Security Headers**: `CSP`, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy`, `Permissions-Policy`, and immutable cache headers configured.
-- [x] **Indexability Safety Net**: `_worker.js` enforces `X-Robots-Tag: noindex, nofollow` HTTP header on all non-production hostnames.
+- [x] **Indexability Safety Net**: workers.dev route disabled on `andromera-web` — the preview URL returns 404 instead of serving indexable content, so canonical tags on `andromera.com` are the only live copy.
 
 ---
 
@@ -44,17 +44,10 @@
 
 ## 4. Account-Level Pre-Launch Tasks (Cloudflare Dashboard)
 
-- [ ] **Custom Domain Binding**:
-  - In Cloudflare Dashboard → Workers & Pages → `andromera-web` → Settings → Triggers → Add Custom Domain:
-    - Add `andromera.com`
-    - Add `www.andromera.com`
-- [ ] **Disable workers.dev Route (Indexability Safety Net)**:
-  - In Cloudflare Dashboard → Workers & Pages → `andromera-web` → Settings → Triggers → Routes:
-    - Disable the `andromera-web.ahmedalseify33.workers.dev` route.
-  - This prevents Google from indexing the preview URL while canonical tags point at `andromera.com`.
+- [x] **Custom Domain Binding**: `andromera.com` and `www.andromera.com` attached as Custom Domains on the `andromera-web` Worker (2026-08-11). Both serve over Cloudflare-managed certs.
+- [x] **Disable workers.dev Route (Indexability Safety Net)**: Disabled 2026-08-11 — `andromera-web.ahmedalseify33.workers.dev` returns 404 and no longer serves site content.
 - [ ] **Cloudflare Web Analytics Token**:
-  - In Cloudflare Dashboard → Web Analytics → Add Site → Copy Token.
-  - In `index.html` line ~977, replace `CLOUDFLARE_BEACON_TOKEN` with your token string.
-- [ ] **DNS & Canonicalization**:
-  - Verify `www.andromera.com` redirects to `andromera.com` in Cloudflare Redirect Rules.
+  - Beacon script is **commented out** in `index.html` (near line 976). No placeholder token ships live.
+  - To enable: In Cloudflare Dashboard → Web Analytics → Add Site → Copy Token → uncomment the beacon script in `index.html` and replace `YOUR_TOKEN_HERE`.
+- [x] **DNS & Canonicalization**: `www.andromera.com` → `https://andromera.com` handled by a zone-level Redirect Rule (`http_request_dynamic_redirect` phase, rule "www to apex"), 301, query string preserved. Verified via curl 2026-08-11.
 
