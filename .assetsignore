@@ -4,6 +4,11 @@ brand assets
 *.log
 node_modules
 .DS_Store
-README.md
-LAUNCH.md
 src
+*.md
+!index.html
+wrangler.jsonc
+.gitignore
+.assetsignore
+*.json
+!site.webmanifest
