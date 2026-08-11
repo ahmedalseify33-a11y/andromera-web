@@ -1223,6 +1223,88 @@
     margin-bottom: 5rem;
   }
 
+  /* ── BRAND FILM ──────────────────────────────────────── */
+  .video-frame {
+    position: relative;
+    margin-bottom: 5rem;
+  }
+
+  .video-frame__corner-sq {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--corner-size);
+    height: var(--corner-size);
+    background: var(--glow);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .video-frame__media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background-color: var(--indigo);
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+
+  .video-frame__poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-frame__iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .video-frame__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid var(--glow);
+    background-color: var(--ink-90);
+    color: var(--glow);
+    cursor: pointer;
+    transition: background-color 200ms var(--ease),
+                color 200ms var(--ease);
+  }
+  .video-frame__play svg {
+    transform: translateX(1px);
+  }
+  .video-frame__play:hover,
+  .video-frame__play:focus-visible {
+    background-color: var(--glow);
+    color: var(--ink);
+  }
+
+  /* Real <button> only operates with JS; without it, the <noscript> link
+     takes over (site.js adds html.js synchronously, before first paint). */
+  button.video-frame__play {
+    display: none;
+  }
+  html.js button.video-frame__play {
+    display: inline-flex;
+  }
+
+  .video-frame__caption {
+    margin-top: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--paper-45);
+  }
+
   /* ── THE CONSTELLATION ──────────────────────────────── */
   .constellation-wrapper {
     margin-top: 5rem;

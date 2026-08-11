@@ -237,6 +237,23 @@
     window.addEventListener("resize", updateProgressBar, { passive: true });
   }
 
+  /* ── VIDEO FAÇADE ─────────────────────────────────── */
+  function initVideoFacade() {
+    var frame = document.querySelector("[data-video-frame]");
+    if (!frame) return;
+    var btn = frame.querySelector("[data-video-play]");
+    var media = frame.querySelector("[data-video-media]");
+    if (!btn || !media) return;
+
+    btn.addEventListener("click", function () {
+      media.innerHTML =
+        '<iframe class="video-frame__iframe" title="Andromera brand film" ' +
+        'src="https://fast.wistia.net/embed/iframe/rdjieby67t?autoPlay=true&playerColor=00D4AA" ' +
+        'allow="autoplay; fullscreen" frameborder="0" scrolling="no" ' +
+        'width="100%" height="100%"></iframe>';
+    });
+  }
+
   /* ── DETAILS ANCHOR TARGETING ─────────────────────── */
   function openTargetRow() {
     var hash = location.hash ? location.hash.substring(1) : "";
@@ -331,6 +348,7 @@
     initFadeUps();
     initWhatsAppFloat();
     initTimeline();
+    initVideoFacade();
     openTargetRow();
     initAuditForm();
   });

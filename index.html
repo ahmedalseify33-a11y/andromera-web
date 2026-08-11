@@ -47,7 +47,7 @@
   <!-- Styles -->
   <link rel="stylesheet" href="/assets/css/site.css">
 
-  <!-- JSON-LD: Organization + ProfessionalService -->
+  <!-- JSON-LD: Organization + ProfessionalService + VideoObject -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -152,6 +152,15 @@
             }
           ]
         }
+      },
+      {
+        "@type": "VideoObject",
+        "name": "Andromera — the brand film.",
+        "description": "Egypt's first AI-native growth partner. Campaigns live in days, built exclusively for Egyptian fashion and personal-care brands.",
+        "thumbnailUrl": "https://andromera.com/assets/img/video-poster-1440.webp",
+        "embedUrl": "https://fast.wistia.net/embed/iframe/rdjieby67t",
+        "uploadDate": "2026-08-11T12:55:56Z",
+        "duration": "PT1M11.0531S"
       }
     ]
   }
@@ -223,13 +232,6 @@
                fetchpriority="high" decoding="sync" loading="eager">
         </picture>
       </div>
-
-      <!-- PHASE 4: video source
-      <video class="hero__video" muted playsinline loop autoplay preload="none" poster="/assets/img/hero-poster.avif">
-        <source src="/assets/video/hero-loop.webm" type="video/webm">
-        <source src="/assets/video/hero-loop.mp4" type="video/mp4">
-      </video>
-      -->
 
       <!-- Layer 2: Violet bloom — atmosphere only -->
       <div class="hero__bloom" aria-hidden="true"></div>
@@ -681,6 +683,31 @@
 
         <!-- The Honesty Line -->
         <p class="honesty-line fade-up">Nour and Dalia aren't clients. They're a composite of every founder we've met at a Cairo pop-up with a beautiful product and no idea why nobody's finding it. If you recognised yourself in either one, we built this for you.</p>
+
+        <!-- Brand Film -->
+        <div class="video-frame" data-video-frame>
+          <span class="video-frame__corner-sq" aria-hidden="true"></span>
+          <div class="video-frame__media" data-video-media>
+            <picture>
+              <source srcset="/assets/img/video-poster-1440.avif" type="image/avif">
+              <source srcset="/assets/img/video-poster-1440.webp" type="image/webp">
+              <img class="video-frame__poster" src="/assets/img/video-poster-1440.webp" alt="" width="1440" height="810" loading="lazy" decoding="async">
+            </picture>
+            <button type="button" class="video-frame__play" aria-label="Play the Andromera brand film" data-video-play>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M6 4l10 6-10 6V4z"/>
+              </svg>
+            </button>
+            <noscript>
+              <a class="video-frame__play video-frame__play--noscript" href="https://fast.wistia.net/embed/iframe/rdjieby67t" target="_blank" rel="noopener" aria-label="Watch the Andromera brand film (opens in a new tab)">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path d="M6 4l10 6-10 6V4z"/>
+                </svg>
+              </a>
+            </noscript>
+          </div>
+          <p class="video-frame__caption">Andromera — the brand film.</p>
+        </div>
 
         <!-- The Constellation -->
         <div class="constellation-wrapper">
