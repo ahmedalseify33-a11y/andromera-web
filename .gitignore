@@ -3,3 +3,6 @@
 brand assets/
 *.log
 node_modules/
+lighthouse-results.json
+live-lighthouse-report.json
+*.lighthouse.json
